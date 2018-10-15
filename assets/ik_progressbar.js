@@ -5,13 +5,28 @@
 			'max': 100
 		};
 
-	/**
+	/*
 	 * @constructs Plugin
 	 * @param {Object} element - Current DOM element from selected collection.
 	 * @param {Object} options - Configuration options.
 	 * @param {string} options.instructions - Custom instructions for screen reader users.
 	 * @param {number} options.max - End value.
 	 */
+	 Plugin.prototype.onKeyDown = function(event) {
+
+	     switch(event.keyCode) {
+
+	         case ik_utils.keys.space:
+	         case ik_utils.keys.enter:
+	             event.preventDefault();
+	             event.stopPropagation();
+	             event.data.plugin.notify();
+	             break;
+	     }
+	  
+
+	 };
+
 	function Plugin( element, options ) {
 
 		this._name = pluginName;

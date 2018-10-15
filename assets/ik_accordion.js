@@ -102,6 +102,9 @@
 					$hdr.next().slideUp(plugin.options.animationSpeed);
 				} else {
 					$btn.addClass('expanded');
+          $btn.attr({
+            'aria-expanded' : true
+          });
 					$hdr.next().slideDown(plugin.options.animationSpeed);
 				}
 			});

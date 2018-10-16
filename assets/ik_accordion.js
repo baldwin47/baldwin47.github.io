@@ -89,12 +89,14 @@ $(document).ready(function() {
 
 		var plugin, $elem, $panel, $me, isVisible;
 
+
 		plugin = event.data.plugin;
 		$elem = $(plugin.element);
 		$me = $(event.target);
 		$panel = $me.parent('dt').next();
 
-		if(plugin.options) { // expand current panel and collapse the rest
+
+		if(plugin.options.autoCollapse) { // expand current panel and collapse the rest
 
 			plugin.headers.each(function(i, el) {
 				var $hdr, $btn;
@@ -121,9 +123,10 @@ $(document).ready(function() {
 			});
 
 		} else { // toggle current panel depending on the state
-
 			isVisible = !!$panel.is(':visible');
 			$panel.slideToggle({ duration: plugin.options.animationSpeed });
+
+
 
 		}
 	};

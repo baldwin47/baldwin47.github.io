@@ -1,3 +1,8 @@
+$(document).ready(function() {
+  $(".multiselect").ik_accordion();
+  $(".singleselect").ik_accordion({ 'autoCollapse': true});
+});
+
 ;(function ( $, window, document, undefined ) {
 
 	var pluginName = 'ik_accordion',
@@ -89,7 +94,7 @@
 		$me = $(event.target);
 		$panel = $me.parent('dt').next();
 
-		if(plugin.options.autoCollapse) { // expand current panel and collapse the rest
+		if(plugin.options) { // expand current panel and collapse the rest
 
 			plugin.headers.each(function(i, el) {
 				var $hdr, $btn;
@@ -99,13 +104,19 @@
 
 				if($btn[0] != $(event.currentTarget)[0]) {
 					$btn.removeClass('expanded');
+					$btn.attr({
+            'aria-expanded' : false
+          });
+					$btn.parent('dt').next().attr('aria-hidden','true');
 					$hdr.next().slideUp(plugin.options.animationSpeed);
 				} else {
 					$btn.addClass('expanded');
           $btn.attr({
             'aria-expanded' : true
           });
+					$btn.parent('dt').next().attr('aria-hidden','false');
 					$hdr.next().slideDown(plugin.options.animationSpeed);
+					$
 				}
 			});
 

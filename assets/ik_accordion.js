@@ -123,12 +123,36 @@ $(document).ready(function() {
 			});
 
 		} else { // toggle current panel depending on the state
-			isVisible = !!$panel.is(':visible');
-			$panel.slideToggle({ duration: plugin.options.animationSpeed });
+      plugin.headers.each(function(i, el) {
+      var $hdr, $btn;
 
+      $hdr = $(el);
+      $btn = $hdr.find('.button');
 
+      if($btn[0] === $(event.currentTarget)[0]) { //could be the source of trouble with toggling attributes
+    	isVisible = !!$panel.is(':visible');
+      $btn.addClass('expanded');
+      $btn.attr({
+        'aria-expanded' : true
+      });
+      $btn.parent('dt').next().attr('aria-hidden','false');
+    //  $hdr.next().slideDown(plugin.options.animationSpeed);
+		  $panel.slideToggle({ duration: plugin.options.animationSpeed });
+      }
+      else{
+      if(isVisible != true){
+        $btn.removeClass('expanded');
+        $btn.attr({
+          'aria-expanded' : false
+        });
+        $btn.parent('dt').next().attr('aria-hidden','true');
 
-		}
+      //  $hdr.next().slideUp(plugin.options.animationSpeed);
+    }
+    }
+		});
+
+  }
 	};
 
 	$.fn[pluginName] = function ( options ) {
